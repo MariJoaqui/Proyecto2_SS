@@ -1,3 +1,39 @@
+<?php
+
+$cont = 0;
+
+$simulaciones = $_POST["simulaciones"];
+
+//Evaluando el Resultado Matemático de la integral (Límites: 3 - 2):
+$L1 = 3; //Límites originales de la integral
+$L2 = 2;
+
+$X1_3 = pow($L1, 3); //Evaluando el valo9r se eleva a los exponentes de la integral (3 y 2)
+$X1_2 = pow($L1, 2);
+$X2_3 = pow($L2, 3);
+$X2_2 = pow($L2, 2);
+
+$resultado_matematico_integral = ($X1_3 + $X1_2) - ($X2_3 + $X2_2); //Procedimiento para obtener el resultado
+
+//Evaluando el Resultado Aproximado de la Integral por el metodo de Monte Carlo:
+
+while ($cont < $simulaciones) {
+    $N_aleatorio_L1 = rand(1, 24);
+    $N_aleatorio_L2 = rand(1, 24);
+    
+    $N1_3 = pow($N_aleatorio_L1, 3);
+    $N1_2 = pow($N_aleatorio_L1, 2);
+    $N2_3 = pow($N_aleatorio_L2, 3);
+    $N2_2 = pow($N_aleatorio_L2, 2);
+    
+    $resultado_monteCarlo_integral = ($N1_3 + $N1_2) - ($N2_3 + $N2_2);
+
+    $cont++;
+    echo $cont;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +53,7 @@
 <body>
 
     <div class="col s12 m8 offset-m2 l6 offset-l3">
-        <form class="col s12" action="simulacion.php" method="post">
+        <form class="col s12" action="" method="post">
             <div class="card-panel pink lighten-4">
                 <b>Método de Monte Carlo: </b><br><br>
 
@@ -29,16 +65,12 @@
 
                         <div class="col s10">
                             <span class="black-text">
-                                Empleando el Método de Monte Carlo, dar solución a la integral simple.<br><br>
+                                • Resultado matemático de la integral: <?php echo $resultado_matematico_integral ?><br><br>
+                                • Resultado aproximado de la integral por el <b>Método de Monte Carlo</b>: <?php echo $resultado_monteCarlo_integral ?><br><br>
+                                • Porcentaje (%) de error entre valor real (matematico): <br><br>
+                                • Valor aproximado obtenido de la simulación: <br><br>
                             </span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="input_text" type="text" data-length="10" name="simulaciones" required>
-                        <label class="black-text" for="input_text">Número de Simulaciones: </label>
                     </div>
                 </div>
 
