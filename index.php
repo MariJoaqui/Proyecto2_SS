@@ -30,15 +30,25 @@
                         <div class="col s10">
                             <span class="black-text">
                                 Empleando el Método de Monte Carlo, dar solución a la integral simple.<br><br>
+                                A continuación, agregue el número de simulaciones a realizar, así como los límites para la 
+                                gereración de los números aleatorios: 
                             </span>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s4">
                         <input id="input_text" type="text" data-length="10" name="simulaciones" required>
                         <label class="black-text" for="input_text">Número de Simulaciones: </label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="input_text" type="text" data-length="10" name="limite1" required>
+                        <label class="black-text" for="input_text">Límite #1: </label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="input_text" type="text" data-length="10" name="limite2" required>
+                        <label class="black-text" for="input_text">Límite #2: </label>
                     </div>
                 </div>
 
