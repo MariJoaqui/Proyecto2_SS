@@ -1,7 +1,5 @@
 <?php
 
-$cont = 0; //Contador
-
 $simulaciones = $_POST["simulaciones"];
 $limite1_usuario = $_POST["limite1"];
 $limite2_usuario = $_POST["limite2"];
@@ -34,10 +32,6 @@ for ($i = 0; $i < $simulaciones; $i++) { //De una vez se agregan los valores al 
     $resultados[$i] = $resultado_monteCarlo_integral; //Se agrega cada resultado al arreglo
 }
 
-//Porcentaje (%) de error entre valor real (matematico) y el valor aproximado obtenido de la simulación
-$Valor_aprox = 24;
-$Porcentaje_error = (abs ($Valor_aprox - $resultado_matematico_integral) / $resultado_matematico_integral) * 100;
-
 ?>
 
 <!DOCTYPE html>
@@ -59,48 +53,67 @@ $Porcentaje_error = (abs ($Valor_aprox - $resultado_matematico_integral) / $resu
 <body>
 
     <div class="col s12 m8 offset-m2 l6 offset-l3">
-        <form class="col s12" action="index.php" method="post">
+        <form class="col s12" action="porcentaje.php" method="post">
             <div class="card-panel pink lighten-4">
                 <b>Método de Monte Carlo: </b><br><br>
 
                 <div class="card-panel pink lighten-5 z-depth-1">
                     <div class="row valign-wrapper">
-                            <span class="black-text">
+                        <span class="black-text">
                                 
-                                • Resultado matemático de la integral: <?php echo $resultado_matematico_integral ?><br><br>
+                            • Resultado matemático de la integral: <?php echo $resultado_matematico_integral ?><br><br>
 
-                                • Resultado aproximado de la integral por el Método de Monte Carlo</b>: <?php echo $resultado_monteCarlo_integral ?><br><br>
-                                
-                                • Resultados aleatorios obtenidos del número de simulaciones (
-                                    <?php
-
-                                    echo $simulaciones;
-
-                                    ?>
-                                ): <br>
-
-                                <?php 
-
-                                for ($i = 0; $i < $simulaciones; $i++) {
-                                    echo '<b>- Simulación #'. $i+1 .'</b> = '.+ $resultados[$i] . '<br>';
-                                }
-                                
-                                ?><br>
-
-                                • Porcentaje (%) de error entre valor real (matematico) y el valor aproximado obtenido de la simulación: 
-                                
+                            • Resultados aleatorios obtenidos del número de simulaciones (
                                 <?php
 
-                                echo $Porcentaje_error;
-                                
-                                ?>
+                                echo $simulaciones;
 
-                            </span>
-                        </div>
-            
+                                ?>
+                            ): <br>
+
+                            <?php 
+
+                            for ($i = 0; $i < $simulaciones; $i++) {
+                                echo '<b>- Simulación #'. $i+1 .'</b> = '.+ $resultados[$i] . '<br>';
+                            }
+                                
+                            ?><br>
+
+                            • El resultado aproximado de la integral por el <b>Método de Monte Carlo</b> es el más repetido:<br>
+                            (Las repeticiones se muestran con un ~)<br>
+                               
+                            <?php
+
+                            $contador = array_count_values($resultados);
+
+                            foreach($contador as $fin => $value) {
+                                echo '<b> -> </b>' . $fin . str_pad(': ', $value, '~') . PHP_EOL . '<br>';
+                            }
+
+                            ?>
+
+                            <br>
+
+                            • Porcentaje (%) de error entre valor real (matematico) y el valor aproximado obtenido de la simulación: <br> 
+                         
+                        </span>
+                    </div>
                 </div>
 
-                <button class="btn waves-effect waves-light white black-text" type="submit" name="action">Inicio</button>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="input_text" type="text" data-length="10" name="porcentaje" required>
+                        <label class="black-text" for="input_text">Ingrese el valor obtenido: </label>
+                        <?php
+
+                        echo 'Ingrese alguno de los resultados obtenidos para ver el porcentaje, preferiblemente el valor del Método Monte Carlo
+                        (el que más se repite en la simulación)';
+
+                        ?>
+                    </div>
+                </div>
+
+                <button class="btn waves-effect waves-light white black-text" type="submit" name="action">Ver porcentaje</button>
             </div>
         </form>  
     </div>
