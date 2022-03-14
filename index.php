@@ -38,15 +38,15 @@
                 </div>
 
                 <div class="row">
-                    <div class="input-field col s4">
+                    <div class="input-field col s2">
                         <input id="input_text" type="text" data-length="10" name="simulaciones" required>
                         <label class="black-text" for="input_text">Número de Simulaciones: </label>
                     </div>
-                    <div class="input-field col s4">
+                    <div class="input-field col s2">
                         <input id="input_text" type="text" data-length="10" name="limite1" required>
                         <label class="black-text" for="input_text">Límite #1: </label>
                     </div>
-                    <div class="input-field col s4">
+                    <div class="input-field col s2">
                         <input id="input_text" type="text" data-length="10" name="limite2" required>
                         <label class="black-text" for="input_text">Límite #2: </label>
                     </div>

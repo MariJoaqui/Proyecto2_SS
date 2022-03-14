@@ -1,13 +1,12 @@
 <?php
 
 $cont = 0; //Contador
-$acum = 0; //Acumulador
 
 $simulaciones = $_POST["simulaciones"];
 $limite1_usuario = $_POST["limite1"];
 $limite2_usuario = $_POST["limite2"];
 
-$resultados = [$simulaciones];
+$resultados = [$simulaciones]; //Se declara el arreglo
 
 //Evaluando el Resultado Matemático de la integral (Límites: 3 - 2):
 $L1 = 3; //Límites originales de la integral
@@ -22,8 +21,8 @@ $resultado_matematico_integral = ($X1_3 + $X1_2) - ($X2_3 + $X2_2); //Procedimie
 
 //Evaluando el Resultado Aproximado de la Integral por el metodo de Monte Carlo:
 
-for ($i = 0; $i < $simulaciones; $i++) {
-    $N_aleatorio_L1 = rand($limite1_usuario, $limite2_usuario);
+for ($i = 0; $i < $simulaciones; $i++) { //De una vez se agregan los valores al arreglo
+    $N_aleatorio_L1 = rand($limite1_usuario, $limite2_usuario); //Se generan los números aleatorios
     $N_aleatorio_L2 = rand($limite1_usuario, $limite2_usuario);
     
     $N1_3 = pow($N_aleatorio_L1, 3);
@@ -31,11 +30,13 @@ for ($i = 0; $i < $simulaciones; $i++) {
     $N2_3 = pow($N_aleatorio_L2, 3);
     $N2_2 = pow($N_aleatorio_L2, 2);
     
-    $resultado_monteCarlo_integral = ($N1_3 + $N1_2) - ($N2_3 + $N2_2);
-    $resultados[$i] = $resultado_monteCarlo_integral;
-
-    $cont++;
+    $resultado_monteCarlo_integral = ($N1_3 + $N1_2) - ($N2_3 + $N2_2); //Procedimiento para obtener el resultado
+    $resultados[$i] = $resultado_monteCarlo_integral; //Se agrega cada resultado al arreglo
 }
+
+//Porcentaje (%) de error entre valor real (matematico) y el valor aproximado obtenido de la simulación
+$Valor_aprox = 24;
+$Porcentaje_error = (abs ($Valor_aprox - $resultado_matematico_integral) / $resultado_matematico_integral) * 100;
 
 ?>
 
@@ -65,8 +66,11 @@ for ($i = 0; $i < $simulaciones; $i++) {
                 <div class="card-panel pink lighten-5 z-depth-1">
                     <div class="row valign-wrapper">
                             <span class="black-text">
+                                
                                 • Resultado matemático de la integral: <?php echo $resultado_matematico_integral ?><br><br>
+
                                 • Resultado aproximado de la integral por el Método de Monte Carlo</b>: <?php echo $resultado_monteCarlo_integral ?><br><br>
+                                
                                 • Resultados aleatorios obtenidos del número de simulaciones (
                                     <?php
 
@@ -74,6 +78,7 @@ for ($i = 0; $i < $simulaciones; $i++) {
 
                                     ?>
                                 ): <br>
+
                                 <?php 
 
                                 for ($i = 0; $i < $simulaciones; $i++) {
@@ -81,8 +86,15 @@ for ($i = 0; $i < $simulaciones; $i++) {
                                 }
                                 
                                 ?><br>
-                                • Porcentaje (%) de error entre valor real (matematico): <br><br>
-                                • Valor aproximado obtenido de la simulación: <br><br>
+
+                                • Porcentaje (%) de error entre valor real (matematico) y el valor aproximado obtenido de la simulación: 
+                                
+                                <?php
+
+                                echo $Porcentaje_error;
+                                
+                                ?>
+
                             </span>
                         </div>
             
